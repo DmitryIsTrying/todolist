@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FilterValuesType } from "../../App";
 import { Button } from "../button/Button";
+import styled from "styled-components";
+import { Theme } from "../../styles/Theme.styled";
 
 export type tasksPropsType = {
   id: number;
@@ -21,28 +23,32 @@ export const Todolist = (props: TodolistPropsType) => {
     setNum((Number(num) + 1).toString());
   };
   return (
-    <div className="Todo">
+    <StyledTodo>
       <h3>{props.title}</h3>
       <div>
         <input />
         <button>+</button>
       </div>
-      <ul>
-        {props.tasks.map((e) => {
-          return (
-            <li key={e.id}>
-              <input type="checkbox" checked={e.isDone} />
-              <span>{e.title}</span>
-              <Button
-                name="X"
-                callBack={() => {
-                  props.removeTask(e.id);
-                }}
-              />
-            </li>
-          );
-        })}
-      </ul>
+      {props.tasks.length !== 0 ? (
+        <ul>
+          {props.tasks.map((e) => {
+            return (
+              <li key={e.id}>
+                <input type="checkbox" checked={e.isDone} />
+                <span>{e.title}</span>
+                <Button
+                  name="X"
+                  callBack={() => {
+                    props.removeTask(e.id);
+                  }}
+                />
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <div>Nothing</div>
+      )}
       <div>
         <Button
           name="All"
@@ -64,6 +70,13 @@ export const Todolist = (props: TodolistPropsType) => {
         />
         <Button name={num} callBack={upCounter} />
       </div>
-    </div>
+    </StyledTodo>
   );
 };
+
+const StyledTodo = styled.div`
+  background-color: ${Theme.color.bgc};
+  padding: 30px;
+  border-radius: 30px;
+  border: 1px solid ${Theme.color.border};
+`;

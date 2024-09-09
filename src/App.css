@@ -6,10 +6,3 @@
 .App>div {
   margin-right: 50px;
 }
-
-.Todo {
-  background-color: rgb(211, 147, 102);
-  padding: 30px;
-  border-radius: 30px;
-  border: 1px solid rgb(61, 61, 61);
-}
