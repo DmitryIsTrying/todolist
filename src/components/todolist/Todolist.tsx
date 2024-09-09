@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FilterValuesType } from "../../App";
 import { Button } from "../button/Button";
 
@@ -16,8 +16,12 @@ type TodolistPropsType = {
 };
 
 export const Todolist = (props: TodolistPropsType) => {
+  let [num, setNum] = useState("1");
+  const upCounter = () => {
+    setNum((Number(num) + 1).toString());
+  };
   return (
-    <div>
+    <div className="Todo">
       <h3>{props.title}</h3>
       <div>
         <input />
@@ -58,6 +62,7 @@ export const Todolist = (props: TodolistPropsType) => {
             props.changeFilter("completed");
           }}
         />
+        <Button name={num} callBack={upCounter} />
       </div>
     </div>
   );
