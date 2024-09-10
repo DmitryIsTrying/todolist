@@ -2,6 +2,24 @@ import React, { useState } from "react";
 import "./App.css";
 import { tasksPropsType, Todolist } from "./components/todolist/Todolist";
 
+const todolists = [
+  {
+    id: 1,
+    title: "JS",
+    isDone: true,
+  },
+  {
+    id: 2,
+    title: "HTML&CSS",
+    isDone: true,
+  },
+  {
+    id: 3,
+    title: "React",
+    isDone: false,
+  },
+];
+
 export type FilterValuesType = "all" | "completed" | "active";
 function App() {
   //   let initTasks2: Array<tasksPropsType> = [
@@ -17,23 +35,7 @@ function App() {
   //     },
   //   ];
 
-  let [tasks, setTasks] = useState<Array<tasksPropsType>>([
-    {
-      id: 1,
-      title: "JS",
-      isDone: true,
-    },
-    {
-      id: 2,
-      title: "HTML&CSS",
-      isDone: true,
-    },
-    {
-      id: 3,
-      title: "React",
-      isDone: false,
-    },
-  ]);
+  let [tasks, setTasks] = useState<Array<tasksPropsType>>(todolists);
 
   let [filter, setFilter] = useState<FilterValuesType>("all");
 
@@ -56,6 +58,13 @@ function App() {
 
   return (
     <div className="App">
+      <Todolist
+        date="10.09.2024"
+        title="What to learn"
+        tasks={tasksForTodolist}
+        removeTask={removeTask}
+        changeFilter={changeFilter}
+      />
       <Todolist
         title="What to learn"
         tasks={tasksForTodolist}
