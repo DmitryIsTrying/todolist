@@ -12,7 +12,7 @@ export type tasksPropsType = {
 
 type TodolistPropsType = {
   title: string;
-  tasks: Array<tasksPropsType>;
+  tasks?: Array<tasksPropsType>;
   removeTask: (id: number) => void;
   changeFilter: (value: FilterValuesType) => void;
   date?: string;
@@ -30,10 +30,11 @@ export const Todolist = ({
     setNum((Number(num) + 1).toString());
   };
 
-  const isTask =
-    tasks.length !== 0 ? (
+  let isTask = null;
+  if (tasks?.length !== 0) {
+    isTask = (
       <ul>
-        {tasks.map((e) => {
+        {tasks?.map((e) => {
           return (
             <li key={e.id}>
               <input type="checkbox" checked={e.isDone} />
@@ -48,9 +49,8 @@ export const Todolist = ({
           );
         })}
       </ul>
-    ) : (
-      <div>Nothing</div>
     );
+  }
 
   return (
     <StyledTodo>

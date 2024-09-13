@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import { tasksPropsType, Todolist } from "./components/todolist/Todolist";
 import { Button } from "./components/button/Button";
-import { Network } from "./netwrorking";
 
-const network = Network;
 
 const todolists = [
   {
@@ -23,7 +21,6 @@ const todolists = [
     isDone: false,
   },
 ];
-
 const money = [
   { banknots: "Dollars", value: 100, number: " a1234567890" },
   { banknots: "Dollars", value: 50, number: " z1234567890" },
@@ -84,10 +81,10 @@ function App() {
 
   let tasksForTodolist = tasks;
   if (filter === "completed") {
-    tasksForTodolist = tasks.filter((t) => t.isDone === true);
+    tasksForTodolist = tasks.filter((t) => t.isDone);
   }
   if (filter === "active") {
-    tasksForTodolist = tasks.filter((t) => t.isDone === false);
+    tasksForTodolist = tasks.filter((t) => !t.isDone);
   }
 
   return (
