@@ -13,12 +13,3 @@ export function spliter(str: string) {
     .map((w) => w.replace("!", ""))
     .filter((e) => e !== "");
 }
-
-const obj = {
-  name: [
-    {
-      firstName: "Dima",
-    },
-    { lastName: "Smirnov" },
-  ],
-};

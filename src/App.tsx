@@ -3,6 +3,43 @@ import "./App.css";
 import { tasksPropsType, Todolist } from "./components/todolist/Todolist";
 import { Button } from "./components/button/Button";
 
+// Learn obj
+
+const obj = {
+  names: [
+    {
+      firstName: "Dima",
+      lastName: "Smirnov",
+    },
+    {
+      firstName: "Anton",
+      lastName: "Kopnin",
+    },
+    {
+      firstName: "Leha",
+      lastName: "Dergachev",
+    },
+  ],
+};
+
+type objectArr = {
+  firstName: string;
+  lastName: string;
+};
+
+type objectType = {
+  names: objectArr[];
+};
+
+const addmiddleName = (object: objectType, str: string) => {
+  object.names.push({ firstName: str, lastName: "Ivanov" });
+};
+
+addmiddleName(obj, "Max");
+
+console.log(obj);
+
+//
 
 const todolists = [
   {
