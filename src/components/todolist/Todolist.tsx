@@ -29,7 +29,7 @@ export const Todolist = ({
                          }: TodolistPropsType) => {
     const [newTaskTitle, setNewTaskTitle] = useState("");
 
-    let isTask = null;
+    let isTask = <div>Сейчас здесь пусто :(</div>;
     if (tasks?.length !== 0) {
         isTask = (
             <ul>
