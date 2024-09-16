@@ -1,86 +1,45 @@
 import React, {useState} from "react";
 import "./App.css";
 import {tasksPropsType, Todolist} from "./components/todolist/Todolist";
-import {Button} from "./components/button/Button";
+import {v1} from "uuid";
 
-// Learn obj
 
-// const reverseString = (str: string): string => str;
-//
-// console.log();
-
-//
-
-const todolists = [
+const todolist = [
     {
-        id: 1,
+        id: v1(),
         title: "JS",
         isDone: true,
     },
     {
-        id: 2,
+        id: v1(),
         title: "HTML&CSS",
         isDone: true,
     },
     {
-        id: 3,
+        id: v1(),
         title: "React",
         isDone: false,
     },
 ];
-const money = [
-    {banknots: "Dollars", value: 100, number: " a1234567890"},
-    {banknots: "Dollars", value: 50, number: " z1234567890"},
-    {banknots: "RUBLS", value: 100, number: " w1234567890"},
-    {banknots: "Dollars", value: 100, number: " e1234567890"},
-    {banknots: "Dollars", value: 50, number: " c1234567890"},
-    {banknots: "RUBLS", value: 100, number: " r1234567890"},
-    {banknots: "Dollars", value: 50, number: " x1234567890"},
-    {banknots: "RUBLS", value: 50, number: " v1234567890"},
-];
+
 
 export type FilterValuesType = "all" | "completed" | "active";
 
 function App() {
-    let [nameBtn, setnameBtn] = useState("All");
 
-    let currentMoney = money;
-
-    if (nameBtn === "RUBLS") {
-        currentMoney = money.filter(
-            (filteredMoney) => filteredMoney.banknots === "RUBLS"
-        );
-    }
-    if (nameBtn === "Dollars") {
-        currentMoney = money.filter(
-            (filteredMoney) => filteredMoney.banknots === "Dollars"
-        );
-    }
-
-    const onClickFilterHandler = (nameButton: string) => {
-        setnameBtn(nameButton);
-    };
-
-    //   let initTasks2: Array<tasksPropsType> = [
-    //     {
-    //       id: 1,
-    //       title: "JS documentation",
-    //       isDone: false,
-    //     },
-    //     {
-    //       id: 2,
-    //       title: "React documentation",
-    //       isDone: false,
-    //     },
-    //   ];
-
-    let [tasks, setTasks] = useState<Array<tasksPropsType>>(todolists);
+    let [tasks, setTasks] = useState<Array<tasksPropsType>>(todolist);
 
     let [filter, setFilter] = useState<FilterValuesType>("all");
 
-    function removeTask(id: number) {
+    function removeTask(id: string) {
         tasks = tasks.filter((e) => e.id !== id);
         setTasks(tasks);
+    }
+
+    function addTask(taskTitle: string) {
+        let newTask = {id: v1(), title: taskTitle, isDone: false};
+        let newTasks = [newTask, ...tasks];
+        setTasks(newTasks);
     }
 
     function changeFilter(value: FilterValuesType) {
@@ -103,45 +62,22 @@ function App() {
                 tasks={tasksForTodolist}
                 removeTask={removeTask}
                 changeFilter={changeFilter}
+                addTask={addTask}
             />
-            <Todolist
-                title="What to learn"
-                tasks={tasksForTodolist}
-                removeTask={removeTask}
-                changeFilter={changeFilter}
-            />
-            {/* <Todolist
-        title="What to read"
-        tasks={initTasks2}
-        removeTask={removeTask}
-      /> */}
-            <ul>
-                {currentMoney.map((e) => {
-                    return (
-                        <li key={e.number}>
-                            banknots: {e.banknots} nominal: {e.value} seria: {e.number}
-                        </li>
-                    );
-                })}
-            </ul>
-            <Button
-                name="All"
-                callBack={() => {
-                    onClickFilterHandler("All");
-                }}
-            />
-            <Button
-                name="Dollars"
-                callBack={() => {
-                    onClickFilterHandler("Dollars");
-                }}
-            />
-            <Button
-                name="RUBLS"
-                callBack={() => {
-                    onClickFilterHandler("RUBLS");
-                }}
-            />
+            {/*<Todolist*/}
+            {/*    title="What to learn"*/}
+            {/*    tasks={tasksForTodolist}*/}
+            {/*    removeTask={removeTask}*/}
+            {/*    changeFilter={changeFilter}*/}
+            {/*    addTask={addTask}*/}
+            {/*/>*/}
+            {/*<Todolist*/}
+            {/*    title="What to read"*/}
+            {/*    tasks={tasksForTodolist}*/}
+            {/*    removeTask={removeTask}*/}
+            {/*    changeFilter={changeFilter}*/}
+            {/*    addTask={addTask}*/}
+            {/*/>*/}
         </div>
     );
 }
