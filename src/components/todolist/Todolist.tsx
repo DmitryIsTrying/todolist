@@ -1,8 +1,9 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React, {useState} from "react";
 import {FilterValuesType} from "../../App";
 import {Button} from "../button/Button";
 import styled from "styled-components";
 import {Theme} from "../../styles/Theme.styled";
+import {Input} from "../input/Input";
 
 export type tasksPropsType = {
     id: string;
@@ -52,15 +53,6 @@ export const Todolist = ({
         );
     }
 
-    const onNewTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setNewTaskTitle(e.currentTarget.value)
-    }
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.shiftKey && e.key === 'Enter') {
-            addTask(newTaskTitle)
-            setNewTaskTitle('')
-        }
-    }
 
     const addTaskHandler = () => {
         addTask(newTaskTitle)
@@ -75,9 +67,7 @@ export const Todolist = ({
         <StyledTodo>
             <h3>{title}</h3>
             <div>
-                <input onChange={onNewTitleChangeHandler}
-                       onKeyUp={onKeyPressHandler}
-                       value={newTaskTitle}/>
+                <Input callBack={addTaskHandler} newTaskTitle={newTaskTitle} setNewTaskTitle={setNewTaskTitle}/>
                 <Button name={'+'} callBack={addTaskHandler}/>
             </div>
             {isTask}

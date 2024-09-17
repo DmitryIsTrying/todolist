@@ -37,9 +37,12 @@ function App() {
     }
 
     function addTask(taskTitle: string) {
-        let newTask = {id: v1(), title: taskTitle, isDone: false};
-        let newTasks = [newTask, ...tasks];
-        setTasks(newTasks);
+        const noSpaceTaskTitle = taskTitle.trim()
+        if (noSpaceTaskTitle.length > 0) {
+            let newTask = {id: v1(), title: noSpaceTaskTitle, isDone: false};
+            let newTasks = [newTask, ...tasks];
+            setTasks(newTasks);
+        }
     }
 
     function changeFilter(value: FilterValuesType) {
