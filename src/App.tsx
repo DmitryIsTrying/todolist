@@ -2,6 +2,9 @@ import React, {useState} from "react";
 import "./App.css";
 import {tasksPropsType, Todolist} from "./components/todolist/Todolist";
 import {v1} from "uuid";
+import {Network} from "./netwrorking";
+
+const test = Network
 
 
 const todolist = [
@@ -67,6 +70,7 @@ function App() {
                 changeFilter={changeFilter}
                 addTask={addTask}
             />
+            {/*<Todolists/>*/}
             {/*<Todolist*/}
             {/*    title="What to learn"*/}
             {/*    tasks={tasksForTodolist}*/}

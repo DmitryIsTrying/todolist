@@ -1,7 +1,25 @@
+import {v1} from "uuid";
+
 export const Network = 1;
 
-const func = () => {
-  return "test";
-};
+const todolist = [
+    {
+        id: v1(),
+        title: "JS",
+        isDone: true,
+    },
+    {
+        id: v1(),
+        title: "HTML&CSS",
+        isDone: true,
+    },
+    {
+        id: v1(),
+        title: "React",
+        isDone: false,
+    },
+];
 
-// console.log(func());
+const result = todolist.filter((e) => e.isDone)
+
+console.log(result)
