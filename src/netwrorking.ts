@@ -1,25 +1,7 @@
-import {v1} from "uuid";
+export const Network = 1
 
-export const Network = 1;
+let arr = ['t', 'e', 's', 't']
 
-const todolist = [
-    {
-        id: v1(),
-        title: "JS",
-        isDone: true,
-    },
-    {
-        id: v1(),
-        title: "HTML&CSS",
-        isDone: true,
-    },
-    {
-        id: v1(),
-        title: "React",
-        isDone: false,
-    },
-];
+let removed = arr.slice(0, 0)
 
-const result = todolist.filter((e) => e.isDone)
-
-console.log(result)
+console.log(removed) // t
