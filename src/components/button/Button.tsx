@@ -1,10 +1,15 @@
-import React from "react";
+import React from 'react'
 
 type ButtonPropsType = {
-    name: string;
-    callBack: () => void;
-};
+  name: string
+  callBack: () => void
+  isActiveBtn?: boolean
+}
 
-export const Button = ({name, callBack}: ButtonPropsType) => {
-    return <button onClick={callBack}>{name}</button>;
-};
+export const Button = ({ name, callBack, isActiveBtn }: ButtonPropsType) => {
+  return (
+    <button className={isActiveBtn ? 'activeBtn' : ''} onClick={callBack}>
+      {name}
+    </button>
+  )
+}
