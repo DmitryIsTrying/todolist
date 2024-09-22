@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './App.css'
 import { tasksPropsType, Todolist as Todo } from './components/todolist/Todolist'
 import { v1 } from 'uuid'
+import { OnOff } from './components/onOff/OnOff'
 
 export type FilterValuesType = 'all' | 'completed' | 'active'
 
@@ -75,6 +76,11 @@ function App() {
         filter={filter}
         sortTasks={sortTasks}
       />
+      {Array(3)
+        .fill(1)
+        .map((_, i) => (
+          <OnOff key={i} />
+        ))}
     </div>
   )
 }

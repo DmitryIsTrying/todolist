@@ -25,7 +25,7 @@ type TodolistPropsType = {
 }
 
 export const Todolist = ({
-  title,
+  title = `default's name title`,
   tasks,
   removeTask,
   changeFilter,
@@ -61,7 +61,7 @@ export const Todolist = ({
 
           return (
             <li className={e.isDone ? 'completedTask' : ''} key={e.id}>
-              <input onChange={onChangeHandler} type="checkbox" checked={e.isDone} />
+              <input id={e.id} onChange={onChangeHandler} type="checkbox" checked={e.isDone} />
               <span>{e.title}</span>
               <Button name="X" callBack={removeTaskHandler} />
             </li>
@@ -89,6 +89,7 @@ export const Todolist = ({
       <h3>{title}</h3>
       <div>
         <Input
+          id={'addInputTask'}
           setError={setError}
           error={error}
           callBack={addTaskHandler}
@@ -108,6 +109,10 @@ export const Todolist = ({
       {date && <div>{date}</div>}
     </StyledTodo>
   )
+}
+
+Todolist.defaultProps = {
+  title: 'What to test',
 }
 
 const StyledTodo = styled.div`
