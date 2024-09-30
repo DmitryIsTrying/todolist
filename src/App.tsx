@@ -203,6 +203,7 @@ function App() {
               filter={tl.filter}
               removeTodolist={removeTodolist}
             />
+            {/* single responsibility*/}
             <Students {...tl} />
           </Fragment>
         )
