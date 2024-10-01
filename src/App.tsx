@@ -1,8 +1,7 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import { Todolist } from './Todolist'
 import { v1 } from 'uuid'
-import { Students } from './Students'
 
 type ObjectType = {
   title: string
@@ -137,6 +136,26 @@ function App() {
     },
   ])
 
+  function changeTaskName(taskId: string, todolistId: number, newTaskName: string) {
+    setTodo(
+      todo.map((todo, indexTodo) =>
+        indexTodo === todolistId
+          ? {
+              ...todo,
+              tasks: todo.tasks.map((task) =>
+                task.taskId === taskId
+                  ? {
+                      ...task,
+                      title: newTaskName,
+                    }
+                  : task
+              ),
+            }
+          : todo
+      )
+    )
+  }
+
   function removeTask(taskId: string, todolistId: number) {
     setTodo(
       todo.map((el, index) =>
@@ -190,22 +209,20 @@ function App() {
         }
         //bad practice, we can delete todolist
         return (
-          <Fragment key={index}>
-            <Todolist
-              id={index}
-              title={tl.title}
-              tasks={tasksForTodolist}
-              students={tl.students}
-              removeTask={removeTask}
-              changeFilter={changeFilter}
-              addTask={addTask}
-              changeTaskStatus={changeStatus}
-              filter={tl.filter}
-              removeTodolist={removeTodolist}
-            />
-            {/* single responsibility*/}
-            <Students {...tl} />
-          </Fragment>
+          <Todolist
+            key={index}
+            id={index}
+            title={tl.title}
+            tasks={tasksForTodolist}
+            students={tl.students}
+            removeTask={removeTask}
+            changeFilter={changeFilter}
+            addTask={addTask}
+            changeTaskStatus={changeStatus}
+            filter={tl.filter}
+            removeTodolist={removeTodolist}
+            changeTaskName={changeTaskName}
+          />
         )
       })}
     </div>

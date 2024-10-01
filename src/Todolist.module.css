@@ -1,0 +1,9 @@
+.titleTodo {
+    color: white
+}
+
+.changeSpan {
+    cursor: pointer;
+    color: #33a9c4;
+    font-weight: bold;
+}
