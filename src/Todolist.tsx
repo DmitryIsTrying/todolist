@@ -2,6 +2,7 @@ import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 import { FilterValuesType, TasksType } from './App'
 import todoClass from './Todolist.module.css'
 import { TaskItem } from './TaskItem'
+import { Button } from '@mui/material'
 
 // export type TaskType = {
 //     id: string
@@ -13,7 +14,6 @@ type PropsType = {
   id: number
   title: string
   tasks: Array<TasksType>
-  students: Array<string>
   removeTask: (taskId: string, todolistId: number) => void
   changeFilter: (value: FilterValuesType, todolistId: number) => void
   addTask: (title: string, todolistId: number) => void
@@ -101,11 +101,12 @@ export function Todolist(props: PropsType) {
           onClick={() => props.changeFilter('active', props.id)}>
           Active
         </button>
-        <button
-          className={props.filter === 'completed' ? 'active-filter' : ''}
+        <Button
+          disableElevation
+          variant={props.filter === 'completed' ? 'contained' : 'outlined'}
           onClick={() => props.changeFilter('completed', props.id)}>
           Completed
-        </button>
+        </Button>
       </div>
       <p></p>
     </div>
