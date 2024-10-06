@@ -1,6 +1,9 @@
 import React, { ChangeEvent, useRef, useState } from 'react'
 import todoClass from './Todolist.module.css'
 import { TasksType } from './App'
+import { Checkbox, IconButton, TextField } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
+import { pink } from '@mui/material/colors'
 
 type TaskItemPropsType = TasksType & {
   id: number
@@ -42,9 +45,20 @@ export const TaskItem = (props: TaskItemPropsType) => {
 
   return (
     <li className={props.isDone && !isChange ? 'is-done' : ''}>
-      <input type="checkbox" onChange={onChangeHandler} checked={props.isDone} />
+      <Checkbox
+        onChange={onChangeHandler}
+        checked={props.isDone}
+        sx={{
+          color: pink[800],
+          '&.Mui-checked': {
+            color: pink[600],
+          },
+        }}
+      />
       {isChange ? (
-        <input
+        <TextField
+          size="small"
+          variant="standard"
           onBlur={handleBlurChangeName}
           onChange={handleChangeValue}
           ref={inputRef}
@@ -52,17 +66,17 @@ export const TaskItem = (props: TaskItemPropsType) => {
           value={textInput}
         />
       ) : (
-        <span onClick={handleChangeTaskName} className={todoClass.changeSpan} title={'Can change'}>
+        <span onDoubleClick={handleChangeTaskName} className={todoClass.changeSpan} title={'Can change'}>
           {props.title}
         </span>
       )}
-
-      <button
+      <IconButton
         onClick={() => {
           props.removeTask(props.taskId, props.id)
-        }}>
-        x
-      </button>
+        }}
+        aria-label="delete task">
+        <DeleteIcon />
+      </IconButton>
     </li>
   )
 }

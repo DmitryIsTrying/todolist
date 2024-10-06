@@ -1,8 +1,11 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, useState } from 'react'
 import { FilterValuesType, TasksType } from './App'
 import todoClass from './Todolist.module.css'
 import { TaskItem } from './TaskItem'
-import { Button } from '@mui/material'
+import { Button, IconButton, TextField } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
+import AddRoundedIcon from '@mui/icons-material/AddRounded'
+import PriorityHighRoundedIcon from '@mui/icons-material/PriorityHighRounded'
 
 // export type TaskType = {
 //     id: string
@@ -61,21 +64,35 @@ export function Todolist(props: PropsType) {
     <div>
       <h3 className={todoClass.titleTodo}>
         {props.title}
-        <button
+        <IconButton
           onClick={() => {
             props.removeTodolist(props.id)
-          }}>
-          x
-        </button>
+          }}
+          aria-label="delete todolist">
+          <DeleteIcon />
+        </IconButton>
       </h3>
       <div>
-        <input value={title} onChange={onChangeHandler} onKeyUp={onKeyPressHandler} className={error ? 'error' : ''} />
-
-        <button onClick={onAddTaskHandler}>+</button>
-        {error && <div className="error-message">{error}</div>}
+        <TextField
+          label="Name for Todo"
+          error={!!error}
+          variant="outlined"
+          size="small"
+          value={title}
+          onChange={onChangeHandler}
+          onKeyUp={onKeyPressHandler}
+          helperText={error}
+        />
+        <IconButton disabled={!!error} onClick={onAddTaskHandler}>
+          {error ? (
+            <PriorityHighRoundedIcon fontSize="inherit" color="error" />
+          ) : (
+            <AddRoundedIcon color="info" fontSize="medium" />
+          )}
+        </IconButton>
       </div>
       {props.tasks.length > 0 ? (
-        <ul>
+        <ul style={{ listStyle: 'none' }}>
           {props.tasks.map((t) => (
             <TaskItem
               key={t.taskId}
@@ -91,17 +108,25 @@ export function Todolist(props: PropsType) {
         <div style={styleNothingTasks}>Тасок нет</div>
       )}
       <div>
-        <button
-          className={props.filter === 'all' ? 'active-filter' : ''}
+        <Button
+          size="small"
+          color="secondary"
+          disableElevation
+          variant={props.filter === 'all' ? 'contained' : 'outlined'}
           onClick={() => props.changeFilter('all', props.id)}>
           All
-        </button>
-        <button
-          className={props.filter === 'active' ? 'active-filter' : ''}
+        </Button>
+        <Button
+          size="small"
+          color="secondary"
+          disableElevation
+          variant={props.filter === 'active' ? 'contained' : 'outlined'}
           onClick={() => props.changeFilter('active', props.id)}>
           Active
-        </button>
+        </Button>
         <Button
+          size="small"
+          color="secondary"
           disableElevation
           variant={props.filter === 'completed' ? 'contained' : 'outlined'}
           onClick={() => props.changeFilter('completed', props.id)}>
